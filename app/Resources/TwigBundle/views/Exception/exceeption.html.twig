@@ -1,0 +1,21 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends "::layout.html.twig" %}
+
+ {% block eene_user_content %}
+ 	<div class="row">
+			<div class="col-md-8 col-md-offset-4">
+    <h1>Exception Page</h1>
+
+    {# example security usage, see below #}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# ... #}
+    {% endif %}
+
+    <p>
+         Checkout for any URL
+        misspelling or <a href="{{ path('user_login') }}">return to the homepage</a>.
+    </p>
+    
+    </div>
+    </div>
+{% endblock %}

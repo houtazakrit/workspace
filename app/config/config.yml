@@ -1,0 +1,109 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: admin.yml } 
+    - { resource: "@UserBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+framework:
+    #esi:             ~
+    translator: { fallbacks: [en] }
+    #translator: { fallback: en }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  en
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        gc_probability: 0
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form:
+        #resources: ['bootstrap_3_layout.html.twig']
+        resources: ['bootstrap_3_horizontal_layout.html.twig']
+   # appel controller Exception de twigBundle pour gerer pages derreur
+    exception_controller:  twig.controller.exception:showAction
+    globals:
+        userdirectory: %userdirectory%
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+#configuration of fosuser
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: EENE\UserBundle\Entity\User
+    registration:
+        confirmation:
+            enabled:    true # change to false to disable registration email confirmation  
+            template:   UserBundle:Registration:email.txt.twig   
+            from_email: 
+                address:        eene.univ.pau@gmail.com
+                sender_name:    Responsable EENE
+        form:
+            type: EENE\UserBundle\Form\RegistrationType
+    resetting:
+        token_ttl: 0
+        email:
+            from_email:
+                address:    eene.univ.pau@gmail.com
+                sender_name:    Responsable EENE
+        form:
+            type:                 fos_user_resetting
+            name:                 fos_user_resetting_form
+            validation_groups:
+                # Defaults:
+                - ResetPassword
+                - Default
+    from_email:
+        address: eene.univ.pau@gmail.com
+        sender_name: Responsable EENE
+    profile:
+        form:
+            type: eene_user_profile  
+    change_password:
+        form:
+            type:                 fos_user_change_password
+            name:                 fos_user_change_password_form
+            validation_groups:
+                # Defaults:
+                - ChangePassword
+                - Default
+    service:
+            mailer: fos_user.mailer.twig_swift

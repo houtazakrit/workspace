@@ -1,0 +1,14 @@
+{% block subject %}
+   Activating your account
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+Hello {{ user.username }} !
+
+To finish activating your account - please visit {{ confirmationUrl }}
+
+Regards,
+The EENE team
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

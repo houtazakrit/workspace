@@ -1,0 +1,24 @@
+user_user:
+    resource: "@UserBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+user_login:
+    path:     /login
+    defaults: { _controller: UserBundle:Login:index }
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Portail:index }
+eene_portail:
+    path:     /portail
+    defaults: { _controller: UserBundle:Portail:index }
+eene_upload:
+    path:     /media/upload
+    defaults: { _controller: UserBundle:Registration:executeUpload }
+
+
+
+   
+    
+    
+    
+    
+    

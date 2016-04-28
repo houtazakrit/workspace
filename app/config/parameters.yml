@@ -1,0 +1,13 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: db_eene
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: eene.univ.pau@gmail.com
+    mailer_password: eeneEENE
+    secret: ThisTokenIsNotSoSecretChangeIt
+    userdirectory: UserPivotFiles
+    # import in controller $this->container->getParameter('userdirectory');

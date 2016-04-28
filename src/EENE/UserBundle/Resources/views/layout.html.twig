@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="container">  
+       
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+   <ul class="nav nav-pills" role="tablist">
+  <li ><a href="{{ path('eene_portail') }}" class="active">My pivot files</a></li>
+    <li class="dropdown pull-right" style="width: 180px;">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                   <i>
+             <span class="glyphicon glyphicon-user"></span>
+                    {{app.user.username}} 
+                   </i>  
+                   <b class="caret"></b></a>
+               <ul class="dropdown-menu">
+                   {% if is_granted("ROLE_ADMIN") %}
+                 <li><a href="{{ path('easyadmin') }}">Admin</a></li>
+                   {% endif %}
+                <li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
+                 <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+              </ul>
+             </li>
+</ul>
+     
+  </div>
+</nav>
+   
+           {# import le contenu de page  #}
+        {% block eene_user_content %}
+        {% endblock %}
+            <footer class="navbar navbar-fixed-bottom bg-default">
+              <div class="container">
+                <p class="navbar-text"  style="position:absolute;text-align:center;width:1000px;">
+             
+                   Contributors: 
+                     
+               
+                </p>
+                  <p>    Copyright © 2016 EENE Application   </p>
+              </div>
+            </footer>
+</div>
+
+
+{% endblock %}

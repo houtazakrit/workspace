@@ -1,0 +1,30 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div align="center" class="box">
+    	 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+ <h2>Resetting </h2>
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" novalidate='novalidate' class="fos_user_resetting_request">
+   
+        {% if invalid_username is defined %}
+            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+        {% endif %}
+      
+             <div class="form-group">
+                      <div class="row"> 
+                          <label for="inputName" class="col-lg-2 control-label">User name or Email</label>
+
+                          <div class="col-lg-2">
+
+                        <input type="text" id="username" name="username" required="required" />
+
+                        </div>
+                    </div>
+                    <div class="row">
+                         <button class="btn btn-primary signup" type="submit" name="action">
+                                     Submit
+                      </button>
+                     </div>
+                          
+            </div>
+      
+</form>
+</div>

@@ -1,0 +1,15 @@
+{% block subject %}
+   Reset Password
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+Hello {{ user.username }} !
+
+
+To reset your password - please visit {{ confirmationUrl }}
+
+Regards,
+The EENE team
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
