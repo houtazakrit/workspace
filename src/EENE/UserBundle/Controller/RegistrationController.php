@@ -23,39 +23,39 @@ class RegistrationController extends Controller
      
       
      public function executeUploadAction()
-    {
-      $fileName = $this->getRequest()->getFileName('file');
-     
-      $this->getRequest()->moveFile('file', sfConfig::get('sf_upload_dir').'/'.$fileName);
-     
-      $this->redirect('media/show?filename='.$fileName);    
-    }
-    
+        {
+          $fileName = $this->getRequest()->getFileName('file');
+         
+          $this->getRequest()->moveFile('file', sfConfig::get('sf_upload_dir').'/'.$fileName);
+         
+          $this->redirect('media/show?filename='.$fileName);    
+        }
+        
     
     public function uploadAction(Request $request)
-    {
-        $document = new Document();
-        $form = $this->createFormBuilder($document)
-            ->add('name')
-            ->add('file')
-            ->getForm();
-    
-        $form->handleRequest($request);
-    
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-    
-            $em->persist($document);
-            $em->flush();
-    
-              $url = $this->container->get('router')->generate('user_portail');
-                        $response = new RedirectResponse($url);
-             
+        {
+            $document = new Document();
+            $form = $this->createFormBuilder($document)
+                ->add('name')
+                ->add('file')
+                ->getForm();
+        
+            $form->handleRequest($request);
+        
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+        
+                $em->persist($document);
+                $em->flush();
+        
+                  $url = $this->container->get('router')->generate('user_portail');
+                            $response = new RedirectResponse($url);
+                 
+            }
+        
+            return array('form' => $form->createView());
         }
-    
-        return array('form' => $form->createView());
-    }
-    
+    //&& mkdir("/uploads/upp", 0777, true) 
     ///registerAction ca marche
     public function registerAction(Request $request)
     {
@@ -82,7 +82,7 @@ class RegistrationController extends Controller
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
 
-            if ($form->isValid() && mkdir("/uploads/upp", 0777, true) ) {
+            if ($form->isValid() ) {
                $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
